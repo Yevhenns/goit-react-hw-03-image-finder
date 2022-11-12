@@ -2,38 +2,45 @@ import React, { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
-import { Modal } from './Modal/Modal';
+// import { Modal } from './Modal/Modal';
 import { fetchImages } from './services/services';
 import { helper } from 'helper/helper';
 // import css from './App.module.css'
 
 export class App extends Component {
   state = {
-    isShown: false,
+    isShown: true,
     images: [],
     page: 1,
     isLoading: false,
+    imageName: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState === this.state.isShown) {
+    if (
+      prevState.isShown !== this.state.isShown &&
+      prevState.imageName !== this.state.imageName
+    ) {
       this.getImages();
     }
   }
 
-  showImages = e => {
-    e.preventDefault();
+  handleSubmit = imageName => {
+    this.setState({ imageName });
+    this.showImages();
+  };
+
+  showImages = () => {
     this.setState(prevState => ({
       isShown: !prevState.isShown,
     }));
   };
 
-  getImages = e => {
-    e.preventDefault();
+  getImages = () => {
     this.setState({
       isLoading: true,
     });
-    fetchImages(this.state.page)
+    fetchImages(this.state.imageName, this.state.page)
       .then(resp => {
         this.setState(prevState => ({
           images: [...prevState.images, ...helper(resp.data.hits)],
@@ -45,17 +52,29 @@ export class App extends Component {
       })
       .finally(() => {
         this.setState({
-          isLoading: true,
+          isLoading: false,
         });
       });
+    this.showImages();
+  };
+
+  loadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
   };
 
   render() {
     return (
       <div>
-        <Searchbar ClickHandler={this.getImages} />
-        <ImageGallery array={this.state.images} />
-        <Button />
+        <Searchbar onSubmit={this.handleSubmit} />
+        {this.state.isShown && (
+          <>
+            <ImageGallery array={this.state.images} />
+            <Button text="Load more" ClickHandler={this.loadMore} />
+          </>
+        )}
+
         {/* <Modal /> */}
       </div>
     );
