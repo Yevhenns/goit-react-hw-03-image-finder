@@ -1,9 +1,9 @@
 export const helper = array => {
-  return array.map(({ id, largeImageURL, pageURL, previewURL, tags }) => ({
+  return array.map(({ id, largeImageURL, pageURL, webformatURL, tags }) => ({
     id,
     largeImageURL,
     pageURL,
-    previewURL,
+    webformatURL,
     tags,
   }));
 };

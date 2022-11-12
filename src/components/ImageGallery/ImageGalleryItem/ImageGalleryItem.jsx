@@ -6,7 +6,7 @@ export const ImageGalleryItem = ({ item }) => {
     <li className={css.ImageGalleryItem}>
       <img
         className={css.ImageGalleryItemImage}
-        src={item.previewURL}
+        src={item.webformatURL}
         alt={item.tags}
       />
     </li>

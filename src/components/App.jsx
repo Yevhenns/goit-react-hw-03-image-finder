@@ -17,30 +17,17 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.isShown !== this.state.isShown &&
-      prevState.imageName !== this.state.imageName
-    ) {
+    if (prevState.imageName !== this.state.imageName) {
       this.getImages();
     }
   }
 
   handleSubmit = imageName => {
+    if (imageName !== this.state.imageName) {
+      this.setState({ page: 1, images: [], isShown: true });
+    }
     this.setState({ imageName });
-    this.showImages();
   };
-
-  showImages = () => {
-    this.setState({
-      isShown: true,
-    });
-  };
-
-  // showImages = () => {
-  //   this.setState(prevState => ({
-  //     isShown: !prevState.isShown,
-  //   }));
-  // };
 
   getImages = () => {
     this.setState({
