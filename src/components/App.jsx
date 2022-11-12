@@ -38,7 +38,7 @@ export class App extends Component {
         this.setState(prevState => ({
           images: [...prevState.images, ...helper(resp.data.hits)],
         }));
-        console.log(resp.data.hits);
+        console.log(resp.data);
       })
       .catch(error => {
         console.log(error.message);
@@ -63,7 +63,7 @@ export class App extends Component {
         {this.state.isShown && (
           <>
             <ImageGallery array={this.state.images} />
-            <Button text="Load more" ClickHandler={this.loadMore} />
+            <Button text="Load more" сlickHandler={this.loadMore} />
           </>
         )}
 
