@@ -9,7 +9,7 @@ import { helper } from 'helper/helper';
 
 export class App extends Component {
   state = {
-    isShown: true,
+    isShown: false,
     images: [],
     page: 1,
     isLoading: false,
@@ -31,10 +31,16 @@ export class App extends Component {
   };
 
   showImages = () => {
-    this.setState(prevState => ({
-      isShown: !prevState.isShown,
-    }));
+    this.setState({
+      isShown: true,
+    });
   };
+
+  // showImages = () => {
+  //   this.setState(prevState => ({
+  //     isShown: !prevState.isShown,
+  //   }));
+  // };
 
   getImages = () => {
     this.setState({
@@ -55,7 +61,6 @@ export class App extends Component {
           isLoading: false,
         });
       });
-    this.showImages();
   };
 
   loadMore = () => {
