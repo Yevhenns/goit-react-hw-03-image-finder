@@ -5,6 +5,7 @@ import { Button } from './Button/Button';
 // import { Modal } from './Modal/Modal';
 import { fetchImages } from './services/services';
 import { helper } from 'helper/helper';
+import { Loader } from './Loader/Loader';
 // import css from './App.module.css'
 
 export class App extends Component {
@@ -64,10 +65,13 @@ export class App extends Component {
         {this.state.isShown && (
           <>
             <ImageGallery array={this.state.images} />
-            <Button text="Load more" сlickHandler={this.loadMore} />
+            {!this.setState.isShown && (
+              <Button text="Load more" сlickHandler={this.loadMore} />
+            )}
           </>
         )}
-
+        {this.state.isLoading && <Loader />}
+        {/* <Loader /> */}
         {/* <Modal /> */}
       </div>
     );
