@@ -17,7 +17,8 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.imageName !== this.state.imageName) {
+    const { imageName, page } = this.state;
+    if (prevState.imageName !== imageName || prevState.page !== page) {
       this.getImages();
     }
   }
