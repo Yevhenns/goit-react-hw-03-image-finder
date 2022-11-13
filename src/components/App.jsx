@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
-// import { Modal } from './Modal/Modal';
+import { Modal } from './Modal/Modal';
 import { fetchImages } from './services/services';
 import { helper } from 'helper/helper';
 import { Loader } from './Loader/Loader';
@@ -15,6 +15,7 @@ export class App extends Component {
     page: 1,
     isLoading: false,
     imageName: '',
+    currentImage: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,21 +59,33 @@ export class App extends Component {
     }));
   };
 
+  showImage = data => {
+    this.setState({ currentImage: data });
+  };
+
+  closeModal = () => {
+    this.setState({ currentImage: null });
+  };
+
   render() {
     return (
       <div>
         <Searchbar onSubmit={this.handleSubmit} />
         {this.state.isShown && (
           <>
-            <ImageGallery array={this.state.images} />
+            <ImageGallery array={this.state.images} onClick={this.showImage} />
             {!this.setState.isShown && (
               <Button text="Load more" сlickHandler={this.loadMore} />
             )}
           </>
         )}
         {this.state.isLoading && <Loader />}
-        {/* <Loader /> */}
-        {/* <Modal /> */}
+        {this.state.currentImage && (
+          <Modal
+            currentImage={this.state.currentImage}
+            closeModal={this.closeModal}
+          />
+        )}
       </div>
     );
   }
