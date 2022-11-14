@@ -6,7 +6,7 @@ import { Modal } from './Modal/Modal';
 import { fetchImages } from './services/services';
 import { helper } from 'helper/helper';
 import { Loader } from './Loader/Loader';
-// import css from './App.module.css'
+import css from './App.module.css';
 
 export class App extends Component {
   state = {
@@ -69,7 +69,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className={css.App}>
         <Searchbar onSubmit={this.handleSubmit} />
         {this.state.isShown && (
           <>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
 export class Modal extends Component {
@@ -23,31 +24,13 @@ export class Modal extends Component {
   };
 
   render() {
-    const { webformatURL, tags } = this.props.currentImage;
+    const { largeImageURL, tags } = this.props.currentImage;
     return (
       <div className={css.Overlay} onClick={this.onBackdropClose}>
         <div className={css.Modal}>
-          <img src={webformatURL} alt={tags} width="800" height="600" />
+          <img src={largeImageURL} alt={tags} width="800" height="600" />
         </div>
       </div>
     );
   }
-  // render() {
-  //   const { webformatURL, tags } = this.props.currentImage;
-  //   return (
-  //     <div className={css.Overlay} onClick={this.onBackdropClose}>
-  //       <div className={css.Modal}>
-  //         <img src={webformatURL} alt={tags} width="800" height="600" />
-  //       </div>
-  //     </div>
-  //   );
-  // }
 }
-
-// import * as basicLightbox from 'basiclightbox';
-
-// export const Modal = basicLightbox.create(`
-//     <img src="assets/images/image.png" width="800" height="600">
-// `);
-
-// Modal.show();
