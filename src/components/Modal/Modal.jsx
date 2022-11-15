@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
 export class Modal extends Component {
+  static propTypes = {
+    closeModal: PropTypes.func.isRequired,
+    currentImage: PropTypes.exact({
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    }).isRequired,
+  };
+  
   componentDidMount() {
     window.addEventListener('keydown', this.onEscapeClose);
   }
