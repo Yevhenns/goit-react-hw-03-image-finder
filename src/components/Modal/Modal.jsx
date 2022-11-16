@@ -5,12 +5,12 @@ import css from './Modal.module.css';
 export class Modal extends Component {
   static propTypes = {
     closeModal: PropTypes.func.isRequired,
-    currentImage: PropTypes.exact({
+    currentImage: PropTypes.shape({
       largeImageURL: PropTypes.string.isRequired,
       tags: PropTypes.string.isRequired,
     }).isRequired,
   };
-  
+
   componentDidMount() {
     window.addEventListener('keydown', this.onEscapeClose);
   }

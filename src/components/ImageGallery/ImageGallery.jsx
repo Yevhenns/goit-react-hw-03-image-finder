@@ -6,10 +6,11 @@ import css from './ImageGallery.module.css';
 export const ImageGallery = ({ array, onClick }) => {
   return (
     <ul className={css.ImageGallery}>
-      {array.map(({ id, webformatURL, tags }) => {
+      {array.map(({ id, largeImageURL, webformatURL, tags }) => {
         return (
           <ImageGalleryItem
             key={id}
+            largeImageURL={largeImageURL}
             webformatURL={webformatURL}
             tags={tags}
             onClick={onClick}
@@ -21,9 +22,13 @@ export const ImageGallery = ({ array, onClick }) => {
 };
 
 ImageGallery.propTypes = {
-  array: PropTypes.array.isRequired,
-  id: PropTypes.number,
-  webformatURL: PropTypes.string,
-  tags: PropTypes.string,
+  array: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.number.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   onClick: PropTypes.func.isRequired,
 };
